@@ -14,16 +14,35 @@ public class FilesService {
     /*
     Get all the detail for each file in the root directory
         TODO
+    Cree un constructor pour la class qui instancie tous les elements
     Try to optimise
     Change array for list
      */
-    public FilesDetail[] getAllFilesDetail(){
-        File folder = new File("/");
+    private static final String DIRECTORY = "/Users/rfibigr/";
+    private FilesDetail[] allTheFiles;
+
+    public FilesService() {
+        File folder = new File(DIRECTORY);
         File[] listOfFiles = folder.listFiles();
-        FilesDetail[] filesDetailList = new FilesDetail[listOfFiles.length];
+        this.allTheFiles = new FilesDetail[listOfFiles.length];
         for(int i = 0; i < listOfFiles.length; i++){
-            filesDetailList[i] = new FilesDetail(i, listOfFiles[i]);
+            this.allTheFiles[i] = new FilesDetail(i, listOfFiles[i]);
         }
-        return filesDetailList;
     }
+
+    public FilesDetail[] getAllTheFiles() {
+        return allTheFiles;
+    }
+
+    public FilesDetail getFileById(int id){
+        return allTheFiles[id];
+    }
+
+    //getFilesByName
+
+    //getFilesByExtention
+
+    //getFileByCreationDate
+
+
 }
