@@ -11,6 +11,7 @@ public class TestSoletancheApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }

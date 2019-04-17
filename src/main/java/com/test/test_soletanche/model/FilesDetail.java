@@ -13,7 +13,6 @@ import java.util.Date;
  * Creation Date
  */
 
-
 public class FilesDetail {
 
     private int id;
