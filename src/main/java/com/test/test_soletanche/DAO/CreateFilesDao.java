@@ -12,6 +12,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that use to check file in a Directory, Upload file, and with the possibility to change the Directory
+ *
+ * Construct :          Create a List of Object FileDetail for each file and folder in the current Directory
+ *                      Initialize with path = "/".
+ *
+ * Method UploadFile :  Take an MulitpartFile as argument and upload this file in the current Directory
+ *                      Return null is file is empty.
+ *
+ * Method ChangePath :  Take a String with the new path in arguments and create a new list of FileDetail for each file
+ *                      and Directory in the new path.
+ *
+ * Getter for folder list and currentPath
+ */
+
 @Repository("localDao")
 public class CreateFilesDao implements FileDao {
 
@@ -29,7 +44,6 @@ public class CreateFilesDao implements FileDao {
             }
         }
     }
-
 
     @Override
     public Path uploadFile(MultipartFile file) {
@@ -51,12 +65,11 @@ public class CreateFilesDao implements FileDao {
         return uploaded;
     }
 
-
     @Override
     public Path changePath(String newPath) {
         Path path = Paths.get(newPath);
         curentPath = newPath;
-        //TODO Don't clear the list but see to create an array of list with path as key
+        //TODO Don't clear the list but create an array of list with path as key
         folderList.clear();
         File folder = new File(newPath);
         File[] listOfFiles = folder.listFiles();

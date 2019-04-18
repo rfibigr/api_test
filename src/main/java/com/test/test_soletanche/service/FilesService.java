@@ -7,7 +7,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+
+/**
+ * Logic operation
+ *
+ * Method getAllFiles : return a List of Object FileDetail for each file and folder in the current Directory
+ *
+ * Method getFileByid : take an id as argument and return a FileDetail of the specific file.
+ *
+ * Method getFileBytype : return a list of all the Directory
+ */
 
 @Service
 public class FilesService {
@@ -31,10 +42,10 @@ public class FilesService {
                 .findFirst().orElse(null);
     }
 
-    public FilesDetail getFileByType(){
+    public List<FilesDetail> getFileByType(){
         return filesDetailsList.stream()
                 .filter(filesDetail -> filesDetail.getDirectory().equals(Boolean.TRUE))
-                .findAny().orElse(null);
+                .collect(Collectors.toList());
     }
 
 

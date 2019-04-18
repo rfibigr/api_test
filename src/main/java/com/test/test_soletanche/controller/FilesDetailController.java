@@ -18,10 +18,20 @@ import java.nio.file.Path;
 import java.util.List;
 
 
+/**
+ * Class Controller
+ *
+ * GET /file : List all the files and Directory in the current Path
+ * GET /file/{id} : get file information by id
+ * GET /file/isdir : List all the Directory int the current Path
+ * GET /download/{id} : Download file by id
+ * GET /path : Get the path of the current directory
+ * POST /upload : upload a file int the current directory
+ * POST /move : change the current directory
+ */
 
 @RestController
 public class FilesDetailController {
-
 
     @Autowired
     FilesService filesService;
@@ -45,8 +55,8 @@ public class FilesDetailController {
     }
 
     @GetMapping(value = "/file/isdir")
-    public FilesDetail getAllDir(){
-        FilesDetail fileDir = filesService.getFileByType();
+    public List<FilesDetail> getAllDir(){
+        List<FilesDetail> fileDir = filesService.getFileByType();
         if (fileDir != null){
             return (fileDir);
         }
@@ -99,7 +109,5 @@ public class FilesDetailController {
         }
         return ResponseEntity.created(newCurrentPath.toUri()).build();
     }
-
-
 }
 
