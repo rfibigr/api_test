@@ -30,4 +30,12 @@ public class FilesService {
                 .filter(filesDetail -> filesDetail.getId() == id)
                 .findFirst().orElse(null);
     }
+
+    public FilesDetail getFileByType(){
+        return filesDetailsList.stream()
+                .filter(filesDetail -> filesDetail.getDirectory().equals(Boolean.TRUE))
+                .findAny().orElse(null);
+    }
+
+
 }

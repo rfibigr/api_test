@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @Repository("localDao")
 public class CreateFilesDao implements FileDao {
@@ -21,55 +20,64 @@ public class CreateFilesDao implements FileDao {
 
     //Constructor
     public CreateFilesDao() {
-        File folder = (new File("/"));
+        curentPath =  "/Users/rfibigr/Documents/";
+        File folder = (new File(curentPath));
         File[] listOfFiles = folder.listFiles();
-        int i = 0;
-        for (File file : listOfFiles){
-            folderList.add(new FilesDetail(i, file));
-            i++;
+        if (listOfFiles != null) {
+            for (File file : listOfFiles) {
+                folderList.add(new FilesDetail(file));
+            }
         }
     }
 
-    //Getter
-    @Override
-    public List<FilesDetail> getFolderList() {
-        return folderList;
-    }
 
     @Override
-    public FilesDetail uploadFile(MultipartFile file) {
+    public Path uploadFile(MultipartFile file) {
         //creation de l'element
+        Path uploaded = null;
+
         if (file.isEmpty()){
             return null;
         }
         try {
             byte[] bytes = file.getBytes();
             Path path = Paths.get(curentPath + file.getOriginalFilename());
-            Files.write(path, bytes);
-            //maj du constructor CreateFileDao
+            System.out.println(path);
+            uploaded = Files.write(path, bytes);
+            //Convert MultipartFile to File
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // TODO Instancier le nouveau fichier et le retourner
-
-        return "Upload succes";
+        return uploaded;
     }
 
+
     @Override
-    public String changePath(String newPath) {
+    public Path changePath(String newPath) {
+        Path path = Paths.get(newPath);
         curentPath = newPath;
+        //TODO Don't clear the list but see to create an array of list with path as key
         folderList.clear();
         File folder = new File(newPath);
         File[] listOfFiles = folder.listFiles();
-        int i = 0;
-        for (File file : listOfFiles){
-            folderList.add(new FilesDetail(i, file));
-            i++;
+        if (listOfFiles != null) {
+            for (File file : listOfFiles) {
+                folderList.add(new FilesDetail(file));
+            }
+            return path;
         }
-        //TODO gestion des retours
         return null;
 
     }
 
+    @Override
+    public List<FilesDetail> getFolderList() {
+        return folderList;
+    }
+
+    @Override
+    public Path getCurrentPath() {
+        return Paths.get(curentPath);
+    }
 }
 

@@ -16,6 +16,7 @@ import java.util.Date;
 public class FilesDetail {
 
     private int id;
+    private static int count = 0;
     private String fileName;
     private String contentType;
     private Boolean canRead;
@@ -29,8 +30,8 @@ public class FilesDetail {
     public FilesDetail() {
     }
 
-    public FilesDetail(int id, File file) {
-        this.id = id;
+    public FilesDetail(File file) {
+        this.id = count++;
         this.contentType = mimeTypesMap.getContentType(file.getName());
         this.fileName = file.getName();
         this.canRead = file.canRead();
@@ -40,6 +41,7 @@ public class FilesDetail {
         this.fileUri = file.toURI();
         this.path = Paths.get(file.getAbsolutePath());
     }
+
 
     public int getId() {
         return id;

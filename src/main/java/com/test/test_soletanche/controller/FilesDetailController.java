@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,7 +41,16 @@ public class FilesDetailController {
             return (fileid);
         }
         else
-            //TODO Gerer les erreurs
+            return (null);
+    }
+
+    @GetMapping(value = "/file/isdir")
+    public FilesDetail getAllDir(){
+        FilesDetail fileDir = filesService.getFileByType();
+        if (fileDir != null){
+            return (fileDir);
+        }
+        else
             return (null);
     }
 
@@ -68,19 +76,28 @@ public class FilesDetailController {
                 .body(resource);
     }
 
+    @GetMapping("/path")
+    public Path getCurrentPath(){
+        return(fileDao.getCurrentPath());
+    }
+
     @PostMapping("/upload")
     public ResponseEntity<Void> uploadFile(@RequestParam("file")MultipartFile file){
 
-        FilesDetail fileUpload = fileDao.uploadFile(file);
-        if ( null ){
+        Path fileUpload = fileDao.uploadFile(file);
+        if (fileUpload == null){
            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.created( uri ).build();
+        return ResponseEntity.created(fileUpload.toUri()).build();
     }
 
     @PostMapping("/move")
-    public String movePath(@RequestBody String newPath){
-        return(fileDao.changePath(newPath));
+    public ResponseEntity<Void> movePath(@RequestBody String newPath){
+        Path newCurrentPath= fileDao.changePath(newPath);
+        if (newCurrentPath == null){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.created(newCurrentPath.toUri()).build();
     }
 
 
