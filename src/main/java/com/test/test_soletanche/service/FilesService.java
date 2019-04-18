@@ -43,9 +43,13 @@ public class FilesService {
     }
 
     public List<FilesDetail> getFileByType(){
-        return filesDetailsList.stream()
+        List<FilesDetail> dirList = filesDetailsList.stream()
                 .filter(filesDetail -> filesDetail.getDirectory().equals(Boolean.TRUE))
                 .collect(Collectors.toList());
+        if (dirList.isEmpty()){
+            return null;
+        }
+        return dirList;
     }
 
 

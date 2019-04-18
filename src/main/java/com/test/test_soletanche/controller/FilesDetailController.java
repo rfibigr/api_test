@@ -1,6 +1,7 @@
 package com.test.test_soletanche.controller;
 
 import com.test.test_soletanche.DAO.FileDao;
+import com.test.test_soletanche.exceptions.MissingFileException;
 import com.test.test_soletanche.model.FilesDetail;
 import com.test.test_soletanche.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -44,29 +46,26 @@ public class FilesDetailController {
         return (filesService.getAllFiles());
     }
 
+
     @GetMapping(value = "/file/{id}")
-    public FilesDetail getFileById(@PathVariable("id") int id) {
+    public FilesDetail getFileById(@PathVariable("id") int id) throws MissingFileException {
+
         FilesDetail fileid = filesService.getFileById(id);
-        if (fileid != null){
-            return (fileid);
-        }
-        else
-            return (null);
+
+        if (fileid == null) throw new MissingFileException("file with id " + id + " doesn't exist");
+
+        return (fileid);
     }
 
     @GetMapping(value = "/file/isdir")
     public List<FilesDetail> getAllDir(){
-        List<FilesDetail> fileDir = filesService.getFileByType();
-        if (fileDir != null){
-            return (fileDir);
-        }
-        else
-            return (null);
+        return (filesService.getFileByType());
     }
 
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadFile(@PathVariable int id) throws IOException {
         FilesDetail fileToDownload = filesService.getFileById(id);
+        if (fileToDownload == null) throw new MissingFileException("file with id " + id + " doesn't exist");
 
         // Variable Declaration
         Path path = fileToDownload.getPath();
@@ -81,7 +80,7 @@ public class FilesDetailController {
         //Return resource
         return ResponseEntity.ok()
                 .headers(headers)
-                .contentLength(fileToDownload.getSize())
+                .contentLength(length)
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .body(resource);
     }

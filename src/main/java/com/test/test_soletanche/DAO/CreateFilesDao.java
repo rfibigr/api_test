@@ -35,7 +35,7 @@ public class CreateFilesDao implements FileDao {
 
     //Constructor
     public CreateFilesDao() {
-        curentPath =  "/Users/rfibigr/Documents/";
+        curentPath =  "/Users/rfibigr/Documents/test";
         File folder = (new File(curentPath));
         File[] listOfFiles = folder.listFiles();
         if (listOfFiles != null) {

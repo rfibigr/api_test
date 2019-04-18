@@ -2,6 +2,8 @@ package com.test.test_soletanche.controller;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class FilesDetailControllerTest {
