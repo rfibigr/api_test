@@ -33,9 +33,14 @@ public class CreateFilesDao implements FileDao {
     private static List<FilesDetail> folderList = new ArrayList<>();
     private static String curentPath;
 
+
+    public static void setCurentPath(String curentPath) {
+        CreateFilesDao.curentPath = curentPath;
+    }
+
     //Constructor
     public CreateFilesDao() {
-        curentPath =  "/Users/rfibigr/Documents/test";
+        curentPath =  "/";
         File folder = (new File(curentPath));
         File[] listOfFiles = folder.listFiles();
         if (listOfFiles != null) {
@@ -68,6 +73,9 @@ public class CreateFilesDao implements FileDao {
     @Override
     public Path changePath(String newPath) {
         Path path = Paths.get(newPath);
+        if (!Files.exists(path)){
+            return null;
+        }
         curentPath = newPath;
         //TODO Don't clear the list but create an array of list with path as key
         folderList.clear();
