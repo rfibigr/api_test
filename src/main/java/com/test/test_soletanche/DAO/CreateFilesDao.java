@@ -34,10 +34,6 @@ public class CreateFilesDao implements FileDao {
     private static String curentPath;
 
 
-    public static void setCurentPath(String curentPath) {
-        CreateFilesDao.curentPath = curentPath;
-    }
-
     //Constructor
     public CreateFilesDao() {
         curentPath =  "/";
@@ -81,14 +77,11 @@ public class CreateFilesDao implements FileDao {
         folderList.clear();
         File folder = new File(newPath);
         File[] listOfFiles = folder.listFiles();
-        if (listOfFiles != null) {
-            for (File file : listOfFiles) {
-                folderList.add(new FilesDetail(file));
-            }
-            return path;
+        assert listOfFiles != null;
+        for (File file : listOfFiles) {
+            folderList.add(new FilesDetail(file));
         }
-        return null;
-
+        return path;
     }
 
     @Override

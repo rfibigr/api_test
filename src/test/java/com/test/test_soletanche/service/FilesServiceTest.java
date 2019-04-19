@@ -42,13 +42,21 @@ public class FilesServiceTest {
 
     @Test
     public void getFileByType() {
-        fileDao.changePath("src/test/TestDirectory");
+        List<FilesDetail> dirList = null;
 
-        List<FilesDetail> dirList = filesService.getFileByType();
+        fileDao.changePath("src/test/TestDirectory");
+        dirList = filesService.getFileByType();
         assertEquals(2, dirList.size());
         assertEquals("Empty", dirList.get(0).getFileName());
         assertEquals("test", dirList.get(1).getFileName());
 
+        fileDao.changePath("src/test/TestDirectory/test");
+        dirList = filesService.getFileByType();
+        assertEquals(true, dirList.isEmpty());
+
+        fileDao.changePath("src/test/TestDirectory/Empty");
+        dirList = filesService.getFileByType();
+        assertEquals(true, dirList.isEmpty());
     }
 
     @Test

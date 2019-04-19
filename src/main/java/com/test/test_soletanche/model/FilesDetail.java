@@ -28,8 +28,6 @@ public class FilesDetail {
     private Path path;
     private MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
 
-    public FilesDetail() {
-    }
 
     public FilesDetail(File file) {
         this.id = count++;
@@ -48,72 +46,22 @@ public class FilesDetail {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public Boolean getCanRead() {
-        return canRead;
-    }
-
-    public void setCanRead(Boolean canRead) {
-        this.canRead = canRead;
-    }
-
-    public Boolean getCanWrite() {
-        return canWrite;
-    }
-
-    public void setCanWrite(Boolean canWrite) {
-        this.canWrite = canWrite;
-    }
 
     public Boolean getDirectory() {
         return isDirectory;
-    }
-
-    public void setDirectory(Boolean directory) {
-        isDirectory = directory;
     }
 
     public long getSize() {
         return size;
     }
 
-    public void setSize(long size) {
-        this.size = size;
-    }
-
-    public URI getFileUri() {
-        return fileUri;
-    }
-
-    public void setFileUri(URI fileUri) {
-        this.fileUri = fileUri;
-    }
-
     public Path getPath() {
         return path;
-    }
-
-    public void setPath(Path path) {
-        this.path = path;
     }
 
     @Override
