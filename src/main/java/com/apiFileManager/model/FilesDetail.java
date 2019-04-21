@@ -1,11 +1,10 @@
-package com.test.test_soletanche.model;
+package com.apiFileManager.model;
 
 import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
 
 
 /*

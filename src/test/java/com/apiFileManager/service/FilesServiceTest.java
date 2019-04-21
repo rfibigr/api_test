@@ -1,15 +1,13 @@
-package com.test.test_soletanche.service;
+package com.apiFileManager.service;
 
-import com.test.test_soletanche.DAO.FileDao;
-import com.test.test_soletanche.model.FilesDetail;
+import com.apiFileManager.DAO.FileDao;
+import com.apiFileManager.model.FilesDetail;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.File;
-import java.nio.file.Files;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

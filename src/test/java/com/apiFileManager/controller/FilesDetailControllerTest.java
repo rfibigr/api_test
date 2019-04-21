@@ -1,8 +1,8 @@
-package com.test.test_soletanche.controller;
+package com.apiFileManager.controller;
 
-import com.test.test_soletanche.DAO.FileDao;
-import com.test.test_soletanche.model.FilesDetail;
-import com.test.test_soletanche.service.FilesService;
+import com.apiFileManager.DAO.FileDao;
+import com.apiFileManager.model.FilesDetail;
+import com.apiFileManager.service.FilesService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

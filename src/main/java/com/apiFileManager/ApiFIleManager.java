@@ -1,13 +1,13 @@
-package com.test.test_soletanche;
+package com.apiFileManager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestSoletancheApplication {
+public class ApiFIleManager {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestSoletancheApplication.class, args);
+		SpringApplication.run(ApiFIleManager.class, args);
 	}
 
 }

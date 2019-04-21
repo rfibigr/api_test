@@ -1,18 +1,14 @@
-package com.test.test_soletanche.service;
+package com.apiFileManager.service;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import com.test.test_soletanche.DAO.FileDao;
-import com.test.test_soletanche.model.FilesDetail;
+import com.apiFileManager.DAO.FileDao;
+import com.apiFileManager.model.FilesDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.*;
 
 
 /**

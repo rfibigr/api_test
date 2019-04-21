@@ -1,4 +1,4 @@
-package com.test.test_soletanche;
+package com.apiFileManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestSoletancheApplicationTests {
+public class ApiFIleManagerTests {
 
 	@Test
 	public void contextLoads() {
