@@ -1,13 +1,18 @@
 package com.test.test_soletanche.service;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.test.test_soletanche.DAO.FileDao;
 import com.test.test_soletanche.model.FilesDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Collections.*;
 
 
 /**
@@ -43,11 +48,14 @@ public class FilesService {
     }
 
     public List<FilesDetail> getFileByType(){
-        List<FilesDetail> dirList = filesDetailsList.stream()
+        return filesDetailsList.stream()
                 .filter(filesDetail -> filesDetail.getDirectory().equals(Boolean.TRUE))
                 .collect(Collectors.toList());
-        return dirList;
     }
 
+    public List<FilesDetail> getSortedFiles() {
+        Collections.sort(filesDetailsList);
+        return filesDetailsList;
+    }
 
 }

@@ -1,13 +1,13 @@
 package com.test.test_soletanche.controller;
 
 import com.test.test_soletanche.DAO.FileDao;
-import com.test.test_soletanche.exceptions.MissingFileException;
 import com.test.test_soletanche.model.FilesDetail;
 import com.test.test_soletanche.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -46,15 +45,20 @@ public class FilesDetailController {
         return (filesService.getAllFiles());
     }
 
+    @GetMapping(value = "/file/sorted")
+    public List<FilesDetail> getSortedFiles() {
+        return (filesService.getSortedFiles());
+    }
 
     @GetMapping(value = "/file/{id}")
-    public FilesDetail getFileById(@PathVariable("id") int id) throws MissingFileException {
+    public ResponseEntity<FilesDetail> getFileById(@PathVariable("id") int id){
 
         FilesDetail fileid = filesService.getFileById(id);
 
-        if (fileid == null) throw new MissingFileException("file with id " + id + " doesn't exist");
-
-        return (fileid);
+        if (fileid == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(fileid, HttpStatus.OK);
     }
 
     @GetMapping(value = "/file/isdir")
@@ -65,7 +69,9 @@ public class FilesDetailController {
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadFile(@PathVariable int id) throws IOException {
         FilesDetail fileToDownload = filesService.getFileById(id);
-        if (fileToDownload == null) throw new MissingFileException("file with id " + id + " doesn't exist");
+        if (fileToDownload == null || fileToDownload.getDirectory()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
         // Variable Declaration
         Path path = fileToDownload.getPath();

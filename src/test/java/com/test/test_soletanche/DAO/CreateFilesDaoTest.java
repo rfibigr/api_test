@@ -24,15 +24,15 @@ public class CreateFilesDaoTest {
 
     @Test
     public void changePath() {
-        List<FilesDetail> fileList = null;
-        Path newPath = null;
-        Path result = null;
+        List<FilesDetail> fileList;
+        Path newPath;
+        Path result;
 
         newPath = fileDao.changePath("src/test/TestDirectory/");
         result = Paths.get("src/test/TestDirectory/");
         fileList = fileDao.getFolderList();
         assertEquals(result, newPath);
-        assertEquals("Empty", fileList.get(0).getFileName());
+        assertEquals("test", fileList.get(0).getFileName());
 
         newPath = fileDao.changePath("src/test/TestDirectory/test/");
         result = Paths.get("src/test/TestDirectory/test/");
@@ -40,30 +40,18 @@ public class CreateFilesDaoTest {
         assertEquals(result, newPath);
         assertEquals("image1.jpeg", fileList.get(0).getFileName());
 
-        newPath = fileDao.changePath("src/test/TestDirectory/Empty/");
-        result = Paths.get("src/test/TestDirectory/Empty/");
-        fileList = fileDao.getFolderList();
-        assertEquals(result, newPath);
-        assertEquals(true, fileList.isEmpty());
-
-        newPath = fileDao.changePath("src/test/");
-        result = Paths.get("src/test/");
-        fileList = fileDao.getFolderList();
-        assertEquals(result, newPath);
-        assertEquals("java", fileList.get(0).getFileName());
-
         newPath = fileDao.changePath("src/test/sdfsa");
         fileList = fileDao.getFolderList();
-        assertEquals(null, newPath);
-        assertEquals("java", fileList.get(0).getFileName());
+        assertNull(newPath);
+        assertEquals(1, fileList.size());
 
 
     }
 
     @Test
     public void getCurrentPath() {
-        Path currenPath = null;
-        Path result = null;
+        Path currenPath;
+        Path result;
 
         fileDao.changePath("src/test/TestDirectory/");
         currenPath = fileDao.getCurrentPath();

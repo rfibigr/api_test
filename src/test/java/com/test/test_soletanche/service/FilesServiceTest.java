@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 @RunWith(SpringRunner.class)
@@ -33,30 +34,35 @@ public class FilesServiceTest {
         fileDao.changePath("src/test/TestDirectory");
 
         List<FilesDetail> fileList = filesService.getAllFiles();
-        assertEquals(4, fileList.size());
-        assertEquals("Empty", fileList.get(0).getFileName());
-        assertEquals("image.jpeg", fileList.get(1).getFileName());
-        assertEquals("test", fileList.get(2).getFileName());
-        assertEquals("text.txt", fileList.get(3).getFileName());
+        assertEquals(3, fileList.size());
+        assertEquals("test", fileList.get(0).getFileName());
+        assertEquals("image.jpeg", fileList.get(2).getFileName());
+        assertEquals("text.txt", fileList.get(1).getFileName());
+    }
+
+    @Test
+    public void getSortedFiles() {
+        fileDao.changePath("src/test/TestDirectory");
+
+        List<FilesDetail> fileList = filesService.getSortedFiles();
+        assertEquals(3, fileList.size());
+        assertEquals("image.jpeg", fileList.get(0).getFileName());
+        assertEquals("test", fileList.get(1).getFileName());
+        assertEquals("text.txt", fileList.get(2).getFileName());
     }
 
     @Test
     public void getFileByType() {
-        List<FilesDetail> dirList = null;
+        List<FilesDetail> dirList;
 
         fileDao.changePath("src/test/TestDirectory");
         dirList = filesService.getFileByType();
-        assertEquals(2, dirList.size());
-        assertEquals("Empty", dirList.get(0).getFileName());
-        assertEquals("test", dirList.get(1).getFileName());
+        assertEquals(1, dirList.size());
+        assertEquals("test", dirList.get(0).getFileName());
 
         fileDao.changePath("src/test/TestDirectory/test");
         dirList = filesService.getFileByType();
-        assertEquals(true, dirList.isEmpty());
-
-        fileDao.changePath("src/test/TestDirectory/Empty");
-        dirList = filesService.getFileByType();
-        assertEquals(true, dirList.isEmpty());
+        assertTrue(dirList.isEmpty());
     }
 
     @Test
@@ -66,14 +72,12 @@ public class FilesServiceTest {
         List<FilesDetail> fileList = filesService.getAllFiles();
         int id = fileList.get(0).getId();
 
-        FilesDetail filesDetail0 = filesService.getFileById(id);
-        assertEquals("Empty", filesDetail0.getFileName());
-        FilesDetail filesDetail2 = filesService.getFileById(id + 1);
-        assertEquals("image.jpeg", filesDetail2.getFileName());
-        FilesDetail filesDetail1 = filesService.getFileById(id + 2);
-        assertEquals("test", filesDetail1.getFileName());
-        FilesDetail filesDetail3 = filesService.getFileById(id + 3);
-        assertEquals("text.txt", filesDetail3.getFileName());
+        FilesDetail filesDetail2 = filesService.getFileById(id);
+        assertEquals("test", filesDetail2.getFileName());
+        FilesDetail filesDetail1 = filesService.getFileById(id + 1);
+        assertEquals("text.txt", filesDetail1.getFileName());
+        FilesDetail filesDetail3 = filesService.getFileById(id + 2);
+        assertEquals("image.jpeg", filesDetail3.getFileName());
     }
 }
 

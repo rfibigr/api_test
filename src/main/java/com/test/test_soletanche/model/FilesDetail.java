@@ -14,7 +14,7 @@ import java.util.Date;
  * Creation Date
  */
 
-public class FilesDetail {
+public class FilesDetail implements  Comparable<FilesDetail>{
 
     private int id;
     private static int count = 0;
@@ -62,6 +62,12 @@ public class FilesDetail {
 
     public Path getPath() {
         return path;
+    }
+
+
+    @Override
+    public int compareTo(FilesDetail file) {
+        return fileName.compareTo(file.getFileName());
     }
 
     @Override
