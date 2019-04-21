@@ -7,7 +7,7 @@ REST Service realise with SpringBoot.
 API request : 
 
 GET /file/
-List all the file with the following format 
+List all the files in the current path 
 
 ```json
  {
@@ -27,17 +27,16 @@ List all the file with the following format
 ```
 
 GET /file/sorted
-List of file sorted by ascii order
+List all the files in the current directory by ascending file name.
 
 GET /file/{id}
-Detail file detail for a specific Id
+Get file information by id
 
 GET /file/isdir
-List all the directory
+List all the directories
 
 GET /path
-return a string with the current path
-
+return a string with the current directory
 ```
 "file:///"
 ```
@@ -46,11 +45,9 @@ GET /download/{id}
 Download a file by id
 
 POST /upload
-a parameter file with the key "file" is needed.
 Upload a file in the current path.
+A file with the key "file" is needed.
 
 POST /move
-A string with the new path is needed. The path need to be finish with a '/'. 
-Change the current path 
-
-example body : /home/username/Documents/
+Change the current path.
+A string with the new path is needed. The path need to be finish with '/'. 
