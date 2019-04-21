@@ -1,4 +1,4 @@
-#File Manager REST API
+# File Manager REST API
 
 
 REST Service realise with SpringBoot.
@@ -27,27 +27,39 @@ List all the files in the current path
 ```
 
 GET /file/sorted
+
 List all the files in the current directory by ascending file name.
 
+
 GET /file/{id}
-Get file information by id
+
+Get file information by id.
+
 
 GET /file/isdir
-List all the directories
+
+List all the directories.
+
 
 GET /path
-return a string with the current directory
+return a string with the current directory.
 ```
 "file:///"
 ```
 
+
 GET /download/{id}
-Download a file by id
+
+Download a file by id.
+
 
 POST /upload
+
 Upload a file in the current path.
 A file with the key "file" is needed.
 
+
 POST /move
+
 Change the current path.
 A string with the new path is needed. The path need to be finish with '/'. 
