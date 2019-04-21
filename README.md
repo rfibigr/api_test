@@ -26,40 +26,29 @@ List all the files in the current path
     },
 ```
 
-GET /file/sorted
-
+GET /file/sorted : 
 List all the files in the current directory by ascending file name.
 
-
-GET /file/{id}
-
+GET /file/{id} : 
 Get file information by id.
 
-
-GET /file/isdir
-
+GET /file/isdir : 
 List all the directories.
 
-
-GET /path
+GET /path : 
 return a string with the current directory.
 ```
 "file:///"
 ```
 
-
-GET /download/{id}
-
+GET /download/{id} : 
 Download a file by id.
 
 
-POST /upload
-
+POST /upload : 
 Upload a file in the current path.
 A file with the key "file" is needed.
 
-
-POST /move
-
+POST /move : 
 Change the current path.
 A string with the new path is needed. The path need to be finish with '/'. 
