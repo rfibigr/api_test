@@ -1,8 +1,6 @@
 # File Manager REST API
 
 
-REST Service realise with SpringBoot.
-
 
 API request : 
 
