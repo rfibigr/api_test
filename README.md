@@ -27,7 +27,7 @@ List all the files in the current path
 ```
 
 GET /file/sorted : 
-List all the files in the current directory by ascending file name.
+List all the files in the current directory by ascending order.
 
 GET /file/{id} : 
 Get file information by id.
